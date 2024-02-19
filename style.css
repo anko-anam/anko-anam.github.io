@@ -106,7 +106,7 @@ p{
     text-decoration: none;
 }
 .toggler-navbar{
-    display: none;
+    display: flex;
 }
 
 .hamburger-menu {
@@ -190,7 +190,7 @@ p{
    transition:  1s;
     }
     .toggler-navbar{
-        display: Block;
+        display: flex;
     }
     .sidebar .active{
         /* display: block; */
