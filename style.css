@@ -190,7 +190,7 @@ p{
    transition:  1s;
     }
     .toggler-navbar{
-        display: flex;
+        display: Block;
     }
     .sidebar .active{
         /* display: block; */
