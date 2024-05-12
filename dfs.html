@@ -116,13 +116,13 @@
   <script>
     const graph = {
       'TAMBAK': new Set(['KETOS', 'SELIKUR']),
-      'KETOS': new Set(['TANARA', 'SELIKUR','TAMBAK']),
-      'SELIKUR': new Set(['TAMBAK', 'KETOS', 'KRAGILAN']),
+      'KETOS': new Set(['TAMBAK','TANARA', 'SELIKUR']),
+      'SELIKUR': new Set(['TAMBAK', 'TANARA', 'KRAGILAN']),
       'TANARA': new Set(['KETOS','TIRTAYASA', 'SELIKUR']),
       'KRAGILAN': new Set(['SELIKUR','TIRTAYASA', 'CIRUAS']),
       'TIRTAYASA': new Set(['TANARA', 'PONTANG', 'KRAGILAN']),
       'CIRUAS': new Set(['KRAGILAN','PONTANG','CICERI']),
-      'PONTANG': new Set(['TIRTAYASA','CIRUAS','BANTEN']),
+      'PONTANG': new Set(['TIRTAYASA','BANTEN','CIRUAS']),
       'CICERI': new Set(['CIRUAS','SERANG', 'PASAR RAU']),
       'SERANG': new Set(['CICERI', 'KASEMEN']),
       'PASAR RAU': new Set(['CIRUAS','CICERI', 'KASEMEN']),
