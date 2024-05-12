@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #0c2b3f;
+      background-size: cover;
+      
+    }
+    .kepala{
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+    }
+   
+    #back {
+    background-color: #0f21c9; /* Warna latar hijau */
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 25px; /* Untuk membuat bentuk oval */
+}
+
+    
+ 
+   .col-lg-4 {
+    background-color: #ebd3d3;
+    border-radius: 50px;
+   }
+   
+    #input-container {
+      display: block;
+      justify-content: space-between;
+      margin-bottom: 20px;
+  
+    }
+       #input-container select {
+      padding: 2px;
+      justify-content: center;
+      border-radius: 10px;
+      border: 5px solid #4CAF50;
+      background-color: #f8f8f8;
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      background-image: url('data:image/svg+xml;utf8,<svg fill="gray" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>');
+      background-repeat: no-repeat;
+      background-position-x: calc(100% - 10px);
+      background-position-y: center;
+      font-size: 16px;
+      outline:none;
+    }
+    #result-container {
+      text-align: center;
+      /* color: white; */
+      font-size: 20px;
+      font-weight: bold;
+      /* background-color: rgb(193, 228, 220); */
+    
+    }
+    
+    /* Desain untuk tombol "Temukan Rute" */
+    #input-container button {
+      border: none;
+      border-radius: 10px;
+      background-color: #4CAF50;
+      color: white;
+      font-size: 20px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    #input-container button:hover {
+      background-color: #45a049;
+    }
+    /* Efek loading */
+    #loading {
+      display: none;
+      border: 16px solid #f3f3f3; /* Light grey */
+      border-top: 16px solid #3498db; /* Blue */
+      border-radius: 50%;
+      width: 80px;
+      height: 80px;
+      animation: spin 1s linear infinite;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      margin-left: -40px;
+      margin-top: -40px;
+      z-index: 1;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Portfolio Details - Personal Bootstrap Template</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="assets/css/style.css" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: MyResume
+  * Updated: Jan 29 2024 with Bootstrap v5.3.2
+  * Template URL: https://bootstrapmade.com/free-html-bootstrap-template-my-resume/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body>
+  <div class="kepala">
+    <div class="logo"><img src="logo1.png" width="80px" alt="logokelas"></div>
+    <h6>PENCARIAN RUTE TERPENDEK MENUJU KE MUSEUM KEPURBAKALAAN BANTEN LAMA</h6>
+   </div>
+   <hr size="4px", color="red">
+  <main id="main">
+
+    <!-- ======= Portfolio Details Section ======= -->
+    <section id="portfolio-details" class="portfolio-details">
+      <div class="col-lg-4">
+        <div class="portfolio-info">
+          <h3>Pencarian DFS (Depth First Search)</h3>
+          <div id="input-container">
+            <select id="start-node">
+              <option value="" selected disabled>Start</option>
+              <option value="TAMBAK">TAMBAK</option>
+              <option value="KETOS">KETOS</option>
+              <option value="SELIKUR">SELIKUR</option>
+              <option value="TANARA">TANARA</option>
+              <option value="KRAGILAN">KRAGILAN</option>
+              <option value="TIRTAYASA">TIRTAYASA</option>
+              <option value="CIRUAS">CIRUAS</option>
+              <option value="PONTANG">PONTANG</option>
+              <option value="CICERI">CICERI</option>
+              <option value="SERANG">SERANG</option>
+              <option value="PASAR RAU">PASAR RAU</option>
+              <option value="KASEMEN">KASEMEN</option>
+              <option value="BANTEN">BANTEN</option>
+            </select>
+            <select id="end-node">
+              <option value="" selected disabled>Goal</option>
+              <option value="TAMBAK">TAMBAK</option>
+              <option value="KETOS">KETOS</option>
+              <option value="SELIKUR">SELIKUR</option>
+              <option value="TANARA">TANARA</option>
+              <option value="KRAGILAN">KRAGILAN</option>
+              <option value="TIRTAYASA">TIRTAYASA</option>
+              <option value="CIRUAS">CIRUAS</option>
+              <option value="PONTANG">PONTANG</option>
+              <option value="CICERI">CICERI</option>
+              <option value="SERANG">SERANG</option>
+              <option value="PASAR RAU">PASAR RAU</option>
+              <option value="KASEMEN">KASEMEN</option>
+              <option value="BANTEN">BANTEN</option>
+            </select>
+        <br/><br/><br/>
+        <button onclick="findRoute()">Temukan Rute</button>
+        <div id="loading"></div>
+      </div>
+      <div class="container">
+        <button id="back">Halaman Utama</button>
+        <div class="row gy-4">
+          
+
+          <!-- <!-- <div class="col-lg-8"> -->
+            <div class="portfolio-details-slider swiper">
+              
+              <!-- <div class="swiper-wrapper align-items-center">
+
+                <div class="swiper-slide">
+                  <img src="assets/img/portfolio/portfolio-details-1.jpg" alt="">
+                </div>
+
+                <div class="swiper-slide">
+                  <img src="assets/img/portfolio/portfolio-details-2.jpg" alt="">
+                </div>
+
+                <div class="swiper-slide">
+                  <img src="assets/img/portfolio/portfolio-details-3.jpg" alt="">
+                </div>
+
+              </div>
+              <div class="swiper-pagination"></div> -->
+            </div>
+          </div>
+
+          
+         
+            
+            <!-- <div class="portfolio-description">
+              <h2>This is an example of portfolio detail</h2>
+              <p>
+                Autem ipsum nam porro corporis rerum. Quis eos dolorem eos itaque inventore commodi labore quia quia. Exercitationem repudiandae officiis neque suscipit non officia eaque itaque enim. Voluptatem officia accusantium nesciunt est omnis tempora consectetur dignissimos. Sequi nulla at esse enim cum deserunt eius.
+              </p>
+            </div> -->
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- End Portfolio Details Section -->
+
+  </main><!-- End #main -->
+  
+
+  <!-- <div id="preloader"></div>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a> -->
+
+  <!-- Vendor JS Files -->
+  <!-- <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="assets/vendor/typed.js/typed.umd.js"></script>
+  <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script> -->
+
+  <!-- Template Main JS File -->
+  <div id="result-container">
+    <p id="result"></p>
+  </div>
+  <script>
+    const graph = {
+      'TAMBAK': new Set(['KETOS', 'SELIKUR']),
+      'KETOS': new Set(['TAMBAK','TANARA', 'SELIKUR']),
+      'SELIKUR': new Set(['TAMBAK', 'KETOS', 'KRAGILAN']),
+      'TANARA': new Set(['KETOS','TIRTAYASA', 'SELIKUR']),
+      'KRAGILAN': new Set(['SELIKUR','TIRTAYASA', 'CIRUAS']),
+      'TIRTAYASA': new Set(['TANARA', 'PONTANG', 'KRAGILAN']),
+      'CIRUAS': new Set(['KRAGILAN','PONTANG','CICERI']),
+      'PONTANG': new Set(['TIRTAYASA','CIRUAS','BANTEN']),
+      'CICERI': new Set(['CIRUAS','SERANG', 'PASAR RAU']),
+      'SERANG': new Set(['CICERI', 'KASEMEN']),
+      'PASAR RAU': new Set(['CIRUAS','CICERI', 'KASEMEN']),
+      'KASEMEN': new Set(['SERANG', 'BANTEN','PASAR RAU']),
+      'BANTEN': new Set(['PONTANG','KASEMEN'])
+    };
+
+    function dfs(start, end, visited = new Set()) {
+      if(start, end === ''){
+        alert("Start dan Goal tidak boleh kosong");
+        return;
+      }
+      if (start === end) {
+        return [start];
+      }
+
+      visited.add(start);
+
+      for (const neighbor of graph[start]) {
+        if (!visited.has(neighbor)) {
+          const path = dfs(neighbor, end, visited);
+          if (path) {
+            return [start, ...path];
+          }
+        }
+      }
+
+      return null;
+    }
+
+    function findRoute() {
+      const startNode = document.getElementById('start-node').value;
+      const endNode = document.getElementById('end-node').value;
+      
+      // Tampilkan efek loading
+      document.getElementById('loading').style.display = 'block';
+
+      setTimeout(() => {
+        const path = dfs(startNode, endNode);
+        
+        if (path) {
+          document.getElementById('result').textContent = `Rute : ${path.join(' => ')}`;
+        } else {
+          document.getElementById('result').textContent = 'Anda Belum Memasukan Start dan Goal';
+        }
+       
+        
+        // Sembunyikan efek loading setelah selesai pencarian
+        document.getElementById('loading').style.display = 'none';
+      }, 2000); // Contoh waktu pencarian 2 detik (harap sesuaikan dengan kebutuhan Anda)
+    }
+    document.getElementById("back").onclick = function() {
+    window.location.href = "index.html";
+};
+  </script>
+
+</body>
+
+</html>

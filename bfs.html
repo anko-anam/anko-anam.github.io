@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>BFS pencarian rute ke museum banten lama</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-image:url("bg1.jpg");
+      background-size: cover;
+    }
+    h1 {
+      text-align: center;
+      color: yellow;
+      font-size: 60px;
+      
+      margin-top: -20px;
+    }
+    #input-container {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+  
+    }
+       #input-container select {
+      padding: 15px;
+      margin-right: 60px;
+      border-radius: 50px;
+      border: 2px solid #ccc;
+      background-color: #f8f8f8;
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      background-image: url('data:image/svg+xml;utf8,<svg fill="gray" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>');
+      background-repeat: no-repeat;
+      background-position-x: calc(100% - 10px);
+      background-position-y: center;
+      font-size: 16px;
+      outline:none;
+    }
+    #result-container {
+      text-align: center;
+      color: white;
+      font-size: 40px;
+      background-color: rgb(24, 17, 49);
+    
+    }
+    /* Desain untuk tombol "Temukan Rute" */
+    #input-container button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 50px;
+      background-color: #4CAF50;
+      color: white;
+      font-size: 20px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    #input-container button:hover {
+      background-color: #45a049;
+    }
+    /* Efek loading */
+    #loading {
+      display: none;
+      border: 16px solid #f3f3f3; /* Light grey */
+      border-top: 16px solid #3498db; /* Blue */
+      border-radius: 50%;
+      width: 80px;
+      height: 80px;
+      animation: spin 2s linear infinite;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      margin-left: -40px;
+      margin-top: -40px;
+      z-index: 1;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <h1>BFS pencarian rute ke Museum Banten</h1>
+  <div id="input-container">
+    <select id="start-node">
+      <option value="" selected disabled>Pilih titik awal</option>
+      <option value="TAMBAK">TAMBAK</option>
+      <option value="KETOS">KETOS</option>
+      <option value="SELIKUR">SELIKUR</option>
+      <option value="TANARA">TANARA</option>
+      <option value="KRAGILAN">KRAGILAN</option>
+      <option value="TIRTAYASA">TIRTAYASA</option>
+      <option value="CIRUAS">CIRUAS</option>
+      <option value="PONTANG">PONTANG</option>
+      <option value="CICERI">CICERI</option>
+      <option value="SERANG">SERANG</option>
+      <option value="PASAR RAU">PASAR RAU</option>
+      <option value="KASEMEN">KASEMEN</option>
+      <option value="BANTEN">BANTEN</option>
+    </select>
+    <select id="end-node">
+      <option value="" selected disabled>Pilih tujuan</option>
+      <option value="TAMBAK">TAMBAK</option>
+      <option value="KETOS">KETOS</option>
+      <option value="SELIKUR">SELIKUR</option>
+      <option value="TANARA">TANARA</option>
+      <option value="KRAGILAN">KRAGILAN</option>
+      <option value="TIRTAYASA">TIRTAYASA</option>
+      <option value="CIRUAS">CIRUAS</option>
+      <option value="PONTANG">PONTANG</option>
+      <option value="CICERI">CICERI</option>
+      <option value="SERANG">SERANG</option>
+      <option value="PASAR RAU">PASAR RAU</option>
+      <option value="KASEMEN">KASEMEN</option>
+      <option value="BANTEN">BANTEN</option>
+    </select>
+<br/><br/><br/>
+<button onclick="findRoute()">Temukan Rute</button>
+    <!-- Efek loading -->
+    <div id="loading"></div>
+  </div>
+  <div id="result-container">
+    <p id="result"></p>
+  </div>
+
+  <script>
+    const graph = {
+      'TAMBAK': new Set(['KETOS', 'SELIKUR']),
+      'KETOS': new Set(['TAMBAK','TANARA', 'SELIKUR']),
+      'SELIKUR': new Set(['TAMBAK', 'KETOS', 'KRAGILAN']),
+      'TANARA': new Set(['KETOS','TIRTAYASA', 'SELIKUR']),
+      'KRAGILAN': new Set(['SELIKUR','TIRTAYASA', 'CIRUAS']),
+      'TIRTAYASA': new Set(['TANARA', 'PONTANG', 'KRAGILAN']),
+      'CIRUAS': new Set(['KRAGILAN','PONTANG','CICERI']),
+      'PONTANG': new Set(['TIRTAYASA','CIRUAS','BANTEN']),
+      'CICERI': new Set(['CIRUAS','SERANG', 'PASAR RAU']),
+      'SERANG': new Set(['CICERI', 'KASEMEN']),
+      'PASAR RAU': new Set(['CIRUAS','CICERI', 'KASEMEN']),
+      'KASEMEN': new Set(['SERANG', 'BANTEN','PASAR RAU']),
+      'BANTEN': new Set(['PONTANG','KASEMEN'])
+    };
+
+    function bfs(start, end) {
+      const queue = [[start]];
+      const visited = new Set();
+
+      while (queue.length > 0) {
+        const path = queue.shift();
+        const node = path[path.length - 1];
+
+        if (node === end) {
+          return path;
+        }
+
+        if (!visited.has(node)) {
+          visited.add(node);
+
+          for (const neighbor of graph[node]) {
+            queue.push([...path, neighbor]);
+          }
+        }
+      }
+
+      return null;
+    }
+
+    function findRoute() {
+      const startNode = document.getElementById('start-node').value;
+      const endNode = document.getElementById('end-node').value;
+      document.getElementById('loading').style.display = 'block';
+      setTimeout(() => {
+      const path = bfs(startNode, endNode);
+      if (path) {
+        document.getElementById('result').textContent = `Rute : ${path.join(' ==> ')}`;
+      } else {
+        document.getElementById('result').textContent = 'No route found';
+      }
+        document.getElementById('loading').style.display = 'none';
+      }, 2000); 
+      }
+    
+  </script>
+</body>
+</html>
