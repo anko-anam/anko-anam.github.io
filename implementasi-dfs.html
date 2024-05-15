@@ -23,11 +23,9 @@
     color: white;
     text-align: center;
     text-decoration: none;
-    display: inline-block;
     font-size: 16px;
-    margin: 4px 2px;
     cursor: pointer;
-    border-radius: 25px; /* Untuk membuat bentuk oval */
+    border-radius: 20px; /* Untuk membuat bentuk oval */
 }
 
     
@@ -148,6 +146,7 @@
     <h6>PENCARIAN RUTE TERPENDEK MENUJU KE MUSEUM KEPURBAKALAAN BANTEN LAMA</h6>
    </div>
    <hr size="4px", color="red">
+  <button id="back">Home</button>
   <main id="main">
 
     <!-- ======= Portfolio Details Section ======= -->
@@ -193,7 +192,7 @@
         <div id="loading"></div>
       </div>
       <div class="container">
-        <button id="back">Halaman Utama</button>
+        
         <div id="hasilcari">
           
           <div id="result-container">
@@ -311,7 +310,7 @@
         const path = dfs(startNode, endNode);
         
         if (path) {
-          document.getElementById('result').textContent = `Rute : ${path.join(' => ')}`;
+          document.getElementById('result').textContent = ` ${path.join(' => ')}`;
         } else {
           document.getElementById('result').textContent = 'Anda Belum Memasukan Start dan Goal';
         }
